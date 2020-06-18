@@ -335,4 +335,15 @@ Connected to guild Lord Ben Loves Lemons, id:338231152231841804
 JacobBot has connected to Discord
 Connected to guild Lord Ben Loves Lemons, id:338231152231841804
 JacobBot has connected to Discord
-Connected to guild Lord Ben Loves Lemons, id:338231152231841804
+Connected to guild Lord Ben Loves Lemons, id:338231152231841804Traceback (most recent call last):
+  File "bot.py", line 39, in <module>
+    bot.run(TOKEN)
+  File "/home/ubuntu/github/jacobbot-discord/lib/python3.7/site-packages/discord/client.py", line 640, in run
+    return future.result()
+  File "/home/ubuntu/github/jacobbot-discord/lib/python3.7/site-packages/discord/client.py", line 621, in runner
+    await self.start(*args, **kwargs)
+  File "/home/ubuntu/github/jacobbot-discord/lib/python3.7/site-packages/discord/client.py", line 584, in start
+    await self.login(*args, bot=bot)
+  File "/home/ubuntu/github/jacobbot-discord/lib/python3.7/site-packages/discord/client.py", line 442, in login
+    await self.http.static_login(token.strip(), bot=bot)
+AttributeError: 'NoneType' object has no attribute 'strip'
