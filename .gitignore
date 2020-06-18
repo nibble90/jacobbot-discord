@@ -1,1 +1,6 @@
-.env
+bin
+lib
+share
+pyvenv.cfg
+lib64
+my-httpd.conf
