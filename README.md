@@ -1,1 +1,3 @@
-# jacobbot-discord
+# JacobBot Discord
+
+This is a module for Discord
