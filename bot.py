@@ -42,7 +42,7 @@ class DiscordBot:
     @bot.command(name="pic", help="Responds with the current top image from r/pics")
     async def reddit_pic(ctx):
         pics = RedditAPI().pics()
-        for (title, score, url, selftext, author, post_id) in pics:
+        for (nsfw, title, score, url, selftext, author, post_id) in pics:
             attach = discord.Embed(
                 title=title,
                 description=selftext,
