@@ -52,3 +52,18 @@ class DiscordBot:
             attach.add_field(name="Upvotes", value=score)
             attach.add_field(name="User", value="u/" + str(author))
             await ctx.send(embed=attach)
+
+    @staticmethod
+    @bot.command(name="sub", help="Responds with the current top image from the provided sub")
+    async def subreddit(ctx, sub: str):
+        results = RedditAPI().subreddit_search(sub)
+        for (nsfw, title, score, url, selftext, author, post_id) in results:
+            attach = discord.Embed(
+                title=title,
+                description=selftext,
+                url="https://redd.it/"+str(post_id)
+            )
+            attach.set_image(url=url)
+            attach.add_field(name="Upvotes", value=score)
+            attach.add_field(name="User", value="u/" + str(author))
+            await ctx.send(embed=attach)
