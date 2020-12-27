@@ -4,12 +4,13 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 from redditgrabber.main_classes import RedditAPI
+from twitterinterface.main import User_OAuth
 
 bot = commands.Bot(command_prefix="+")
 
 class DiscordBot:
     def __init__(self):
-        load_dotenv()
+        load_dotenv(dotenv_path="/home/ubuntu/jacobbot/discordbot/.env")
         self.TOKEN = os.getenv('DISCORD_TOKEN')
         # bot = commands.Bot(command_prefix="+")
         bot.run(self.TOKEN)
@@ -67,3 +68,14 @@ class DiscordBot:
             attach.add_field(name="Upvotes", value=score)
             attach.add_field(name="User", value="u/" + str(author))
             await ctx.send(embed=attach)
+    @staticmethod
+    @bot.command(name="twitterregister", help="Responds with link to register bot to your Twitter account")
+    async def twitter_register(ctx):
+        uuid = ctx.author.id
+        url = User_OAuth(str(uuid)).generate_url()
+        attach = discord.Embed(title="Twitter Authorisation Link",
+                                description="Click this link to authorise your twitter account to this bot",
+                                url=url)
+        await ctx.author.send(embed=attach)
+        # print(ctx.author.id)
+        
