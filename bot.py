@@ -78,4 +78,19 @@ class DiscordBot:
                                 url=url)
         await ctx.author.send(embed=attach)
         # print(ctx.author.id)
+    
+    @staticmethod
+    @bot.command(name="tweet", help="Tweets a message from your twitter account")
+    async def tweet(ctx, *, message):
+        uuid = ctx.author.id
+        inst = User_OAuth(str(uuid))
+        authorised = inst.attempt_authorise()
+        if(not authorised):
+            url = inst.generate_url()
+            attach = discord.Embed(title="Twitter Authorisation Link",
+                                    description="Click this link to authorise your twitter account to this bot",
+                                    url=url)
+            await ctx.author.send(embed=attach)
+        else:
+            inst.tweet(message)
         
