@@ -92,5 +92,9 @@ class DiscordBot:
                                     url=url)
             await ctx.author.send(embed=attach)
         else:
-            inst.tweet(message)
+            if(len(message) > 280):
+                await ctx.send("This message is above the 280 character Twitter limit")
+            else:
+                inst.tweet(message)
+                
         
