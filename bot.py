@@ -113,7 +113,7 @@ class DiscordBot:
         await ctx.send(embed=attach)
 
     @staticmethod
-    @bot.command(name="gettweet", help="Gets a user's most recent tweet")
+    @bot.command(name="lasttweet", help="Gets a user's most recent tweet")
     async def gettweet(ctx, username):
         user = str(username)
         inst = User_Unauthenticated(user)
