@@ -96,6 +96,7 @@ class DiscordBot:
                 await ctx.send("This message is above the 280 character Twitter limit")
             else:
                 inst.tweet(message)
+                await ctx.send("Your tweet has been posted to the Twitter account you linked")
 
     @staticmethod
     @bot.command(name="twitteruser", help="Gathers information on a twitter user")
