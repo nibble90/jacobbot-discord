@@ -4,7 +4,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 from redditgrabber.main_classes import RedditAPI
-from twitterinterface.main import User_OAuth
+from twitterinterface.main import User_OAuth, User_Unauthenticated
 
 bot = commands.Bot(command_prefix="+")
 
@@ -96,5 +96,33 @@ class DiscordBot:
                 await ctx.send("This message is above the 280 character Twitter limit")
             else:
                 inst.tweet(message)
+
+    @staticmethod
+    @bot.command(name="twitteruser", help="Gathers information on a twitter user")
+    async def twitteruser(ctx, username):
+        user = str(username)
+        inst = User_Unauthenticated(user)
+        info = inst.basic_info() #return self.screen_name, self.name, self.description, self.follower_count, self.profile_picture
+        attach = discord.Embed(title=str(info[1]),
+                                description=str(info[2]),
+                                url=str(info[5]))
+        attach.add_field(name="Username", value="@{}".format(info[0]))
+        attach.add_field(name="Followers", value=info[3])
+        attach.set_image(url=info[4])
+        await ctx.send(embed=attach)
+
+    @staticmethod
+    @bot.command(name="gettweet", help="Gets a user's most recent tweet")
+    async def gettweet(ctx, username):
+        user = str(username)
+        inst = User_Unauthenticated(user)
+        info = inst.last_tweet(formatting="chatbot") #return self.screen_name, self.name, self.description, self.follower_count, self.profile_picture
+        attach = discord.Embed(title="@{}".format(info[2]),
+                                description=str(info[0]),
+                                url=str(info[1]))
+        attach.set_image(url=info[3])
+        await ctx.send(embed=attach)
+
                 
-        
+if __name__ == "__main__":
+    DiscordBot()
